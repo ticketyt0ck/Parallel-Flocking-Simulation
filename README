@@ -1,0 +1,7 @@
+This repository holds a parallel flocking simulation meant to show the speedup of such a simulation using MPI and OpenMP.
+
+It is being written by Nick Yelito and Frank Capobianco as part of Moravian College's CSCI 330 - Parallel Programming
+course.
+
+
+Don't screw anything up in here...
