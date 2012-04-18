@@ -125,7 +125,7 @@ void set_background(int color) {
 }
 
 
-
+// Try and run the given file as a visual simulation
 void run_file(const char* file){
 	wait_until_keypress();
 	FILE* the_file = fopen(file, "r");
@@ -153,8 +153,36 @@ void run_file(const char* file){
 		
 		}
 		update_window();
+		
+		fclose(the_file);
 	
+}
+	
+	
+// add a point to a given file with an x y and type and the file to write to
+void add_point_to_file(int x, int y, int type, char* file){
+	
+
+	FILE* the_file = fopen(file, "a");
+
+	fprintf(the_file, "%d %d %d\n", x, y, type);
+	
+	fclose(the_file);
+		
+		
+}
+
+// add the given terminator to the given file
+void add_terminator_to_file(int term, char* file){
+	FILE* the_file = fopen(file, "a");
+
+	fprintf(the_file, "%d\n", term);
+	
+	fclose(the_file);
+		
+		
 	}
+		
 
 
 
