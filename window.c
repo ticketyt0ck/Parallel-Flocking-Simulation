@@ -149,7 +149,7 @@ void run_file(const char* file){
 		
 	
 	
-		printf("Chars read were: %d, %d - %d\n", x_coord, y_coord, type);
+		//printf("Chars read were: %d, %d - %d\n", x_coord, y_coord, type);
 		
 		}
 		update_window();

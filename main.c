@@ -22,6 +22,42 @@ int main(int argc, char **argv) {
         printf("Running a simulation with %lu agents for %lu steps and saving the data to the file %s\n", 
         	num_agents, num_steps, filename);
         
+        // here's the simulation skeleton
+        
+        
+        // create the agents, with random headings, maybe random locations or all in a bunch
+        
+        // for each numstep
+        
+        //	for each agent
+        //		do cohesion, alignment, and seperation
+        //		update new heading
+        // 	
+        // 	for each agent
+        //		update the agent location
+        //		check their position within boundaries, fix it with mod	
+        //		update old heading by setting it = to new heading
+        //		write position of agent to file
+        //
+        //	(if it's not the last step)
+        //	write -2 to file
+        //
+        // write -1 to file
+        
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         return 0;
         
 }
