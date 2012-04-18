@@ -4,6 +4,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"window.h"
+#include<time.h>
 
 int window_width;
 int window_height;
@@ -122,6 +123,40 @@ void set_color(int color) {
 void set_background(int color) {
     XSetBackground(display, gc, color);
 }
+
+
+
+void run_file(const char* file){
+	wait_until_keypress();
+	FILE* the_file = fopen(file, "r");
+	int x_coord, y_coord, type;
+	while(x_coord != -1){
+		if(x_coord == -2){
+			update_window();
+			sleep(1);
+			fscanf(the_file, "%d", &x_coord);
+		}
+		fscanf(the_file, "%d", &x_coord);
+		fscanf(the_file, "%d", &y_coord);
+		fscanf(the_file, "%d", &type);
+		                                         
+		if(type == 0){
+			set_color(41550);
+		}
+		else
+			set_color(WHITE);
+		plot_point(x_coord, y_coord);
+		
+	
+	
+		printf("Chars read were: %d, %d - %d\n", x_coord, y_coord, type);
+		
+		}
+		update_window();
+	
+	}
+
+
 
 void test() {
     int i, j;

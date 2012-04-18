@@ -11,10 +11,14 @@ int main(int argc, char **argv) {
 	
 	create_window(400,400, "Test");
 	
+	set_color(199942);
+	run_file("testfile.txt");
 
-
+	/*
 	int i = 0;
 	int j = 0;
+	int k = 0;
+	for(k = 0; k < 100; k++){
 	for(j = 0; j < 1000; j++){// for each step in the simulation
 	for(i = 0; i< 1000; i++){// for each agent
 		set_color(i*i *j *j);
@@ -28,8 +32,9 @@ int main(int argc, char **argv) {
 		
 	}
 	update_window();
-	}
+	}}
 	//update_window();
+	*/
 	wait_until_keypress();
 	close_window();
 	
