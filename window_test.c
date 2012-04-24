@@ -11,9 +11,15 @@ int main(int argc, char **argv) {
 	
 	create_window(400,400, "Test");
 	
-	set_color(199942);
-	run_file("testfile.txt");
+	
+	
+	add_point_to_file(1, 1, 1, "test2.txt");
+	add_point_to_file(2, 1, 1, "test2.txt");
+	add_point_to_file(3, 1, 0, "test2.txt");
+	//add_terminator_to_file(-2, "test2.txt");
+	add_terminator_to_file(-1, "test2.txt");
 
+	run_file("test2.txt");
 	/*
 	int i = 0;
 	int j = 0;
