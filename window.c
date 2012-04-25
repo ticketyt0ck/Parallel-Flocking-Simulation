@@ -133,7 +133,7 @@ void run_file(const char* file){
 	while(x_coord != -1){
 		if(x_coord == -2){
 			update_window();
-			sleep(1);
+			usleep(200000);
 			fscanf(the_file, "%d", &x_coord);
 		}
 		fscanf(the_file, "%d", &x_coord);

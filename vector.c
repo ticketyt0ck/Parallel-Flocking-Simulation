@@ -24,8 +24,15 @@ Vector2D divide(double z, Vector2D* v) {
 
 
 void divide_equals(Vector2D* curr, double z) {
-	curr->x /= z;
-	curr->y /= z;
+	if ((abs(curr->x - 0.0) < TOL)) {
+		curr->x = 0;
+	}else
+		curr->x /= z;
+
+	if((abs(curr->y - 0.0) < TOL))
+		curr->y = 0;
+	else
+		curr->y /= z;
 }
 
 double dot(Vector2D* u, Vector2D* v) {

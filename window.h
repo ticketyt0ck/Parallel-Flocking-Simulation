@@ -16,6 +16,9 @@ void plot_point(int, int);
 void wait_until_keypress(void);
 /* frees a windows resources */
 void close_window(void);
+void add_point_to_file(int x, int y, int type, char* file);
+void add_terminator_to_file(int term, char* file);
+void run_file(const char* file);
 
 void test(void);
 

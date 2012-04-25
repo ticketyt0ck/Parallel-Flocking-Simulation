@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -g -O3
-SRCS = main.c vector.c point.c agent.c
+SRCS = main.c vector.c point.c agent.c steering_behaviors.c window.c
 PROG = main
 OBJS = $(SRCS:.c=.o)
 LFLAGS = -lm -lX11 -o $(PROG)

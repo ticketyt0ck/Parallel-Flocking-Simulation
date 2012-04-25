@@ -22,12 +22,12 @@ Vector2D point_minus(Point2D* curr,Point2D* rhs){
 }
 
 // Get the Vector2D representing curr + rhs
-Vector2D point_plus(Point2D* curr,Vector2D* rhs){
+Point2D point_plus(Point2D* curr,Vector2D* rhs){
 
     double new_x = curr->x + rhs->x;
     double new_y = curr->y + rhs->y;
 
-    return init_vector(new_x, new_y);
+    return init_point(new_x, new_y);
 
 }
 
