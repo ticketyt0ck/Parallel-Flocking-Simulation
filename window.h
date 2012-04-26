@@ -1,6 +1,9 @@
+
+
 #ifndef _WINDOW_H_
 #define _WINDOW_H_
 
+#include "agent.h"
 #define WHITE (255<<16 | 255<<8 | 255)
 #define BLACK 0
 
@@ -19,6 +22,7 @@ void close_window(void);
 void add_point_to_file(int x, int y, int type, char* file);
 void add_terminator_to_file(int term, char* file);
 void run_file(const char* file);
+void run_sim(Agent **agent_list, long num_steps, long num_agents);
 
 void test(void);
 

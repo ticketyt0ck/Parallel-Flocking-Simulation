@@ -6,6 +6,7 @@
 #include"window.h"
 #include<time.h>
 
+
 int window_width;
 int window_height;
 int screen;
@@ -124,37 +125,37 @@ void set_background(int color) {
     XSetBackground(display, gc, color);
 }
 
-
 // Try and run the given file as a visual simulation
-void run_file(const char* file){
+void run_sim(Agent **agent_list, long num_steps, long num_agents){
+	
 	wait_until_keypress();
-	FILE* the_file = fopen(file, "r");
-	int x_coord, y_coord, type;
-	while(x_coord != -1){
-		if(x_coord == -2){
-			update_window();
-			usleep(200000);
-			fscanf(the_file, "%d", &x_coord);
-		}
-		fscanf(the_file, "%d", &x_coord);
-		fscanf(the_file, "%d", &y_coord);
-		fscanf(the_file, "%d", &type);
-		                                         
-		if(type == 0){
-			set_color(41550);
-		}
-		else
-			set_color(WHITE);
-		plot_point(x_coord, y_coord);
 		
+	int x_coord, y_coord, type;
 	
-	
-		//printf("Chars read were: %d, %d - %d\n", x_coord, y_coord, type);
+	int i, j;
+	for(i=0; i<num_steps; i++){
+		for(j=0; j<num_agents; j++){
+			x_coord = agent_list[i][j].position.x;	
+			y_coord = agent_list[i][j].position.y;
+			type = agent_list[i][j].type;	
+			
+			
+			
+			if(type == 0){
+				set_color(41550);
+			}
+			else{
+				set_color(WHITE);
+			}
+			
+			plot_point(x_coord, y_coord);
 		
 		}
 		update_window();
-		
-		fclose(the_file);
+		//wait_until_keypress();
+		usleep(50000);
+	}
+	
 	
 }
 	

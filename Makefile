@@ -1,9 +1,9 @@
 CC = gcc
-CFLAGS = -Wall -g -O3
+CFLAGS = -Wall -g -fopenmp
 SRCS = main.c vector.c point.c agent.c steering_behaviors.c window.c
 PROG = main
 OBJS = $(SRCS:.c=.o)
-LFLAGS = -lm -lX11 -o $(PROG)
+LFLAGS = -lm -fopenmp -lX11 -o $(PROG)
 .c.o:
 	$(CC) -c $(CFLAGS) $<
 
