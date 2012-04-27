@@ -77,10 +77,9 @@ int main(int argc, char **argv) {
         double speed = 5;
         Agent_Type predator_type = predator;
         agent_lists_at_timesteps[0][j] = init_agent(&heading, &start_loc, speed, predator_type);
-        
+        int agent_close;
         double ts, te;
         
-        //printf("After first loop\n");
         
         // for each numstep
         ts = omp_get_wtime();
@@ -88,33 +87,65 @@ int main(int argc, char **argv) {
         for(timestep = 1; timestep < num_steps; timestep++){
         
         	int k;
-        	Vector2D s,c,a, combo;
+        	Vector2D s,c,a, combo, seek_vector;
+        	
 # 		pragma omp parallel for num_threads(thread_count) \
         		private(s, c, a, combo, k)
         	for(k = 0; k< num_agents; k++){
+        		if(agent_lists_at_timesteps[timestep-1][k].type == prey) {
+        			
+				s = separation(&agent_lists_at_timesteps[timestep-1][k], k, agent_lists_at_timesteps[timestep-1], num_agents);
+				c = cohesion(&agent_lists_at_timesteps[timestep-1][k], k, agent_lists_at_timesteps[timestep-1], num_agents);
+				a = alignment(&agent_lists_at_timesteps[timestep-1][k], k, agent_lists_at_timesteps[timestep-1], num_agents);
+						
+				
+	
+				combo = plus(&agent_lists_at_timesteps[timestep-1][k].heading, &s);
+				plus_equals(&combo, &c);
+				plus_equals(&combo, &a);
+				divide_equals(&combo, 1.1);
+				
+				agent_lists_at_timesteps[timestep][k].heading.x = combo.x;
+				agent_lists_at_timesteps[timestep][k].heading.y = combo.y;
+				
+				agent_lists_at_timesteps[timestep][k].position.x = agent_lists_at_timesteps[timestep-1][k].position.x;
+				agent_lists_at_timesteps[timestep][k].position.y = agent_lists_at_timesteps[timestep-1][k].position.y;
+				
+				agent_lists_at_timesteps[timestep][k].speed = agent_lists_at_timesteps[timestep-1][k].speed;
+				agent_lists_at_timesteps[timestep][k].type = agent_lists_at_timesteps[timestep-1][k].type;
+        		}
         		
-        		s = separation(&agent_lists_at_timesteps[timestep-1][k], k, agent_lists_at_timesteps[timestep-1], num_agents);
-        		c = cohesion(&agent_lists_at_timesteps[timestep-1][k], k, agent_lists_at_timesteps[timestep-1], num_agents);
-        		a = alignment(&agent_lists_at_timesteps[timestep-1][k], k, agent_lists_at_timesteps[timestep-1], num_agents);
-        		     		
-        		
-
-        		combo = plus(&agent_lists_at_timesteps[timestep-1][k].heading, &s);
-        		plus_equals(&combo, &c);
-   		        plus_equals(&combo, &a);
-   		        //printf("Combo x is %f and y is %f\n", combo.x, combo.y);
-   		        divide_equals(&combo, 1.1);
-   		        
-        		agent_lists_at_timesteps[timestep][k].heading.x = combo.x;
-        		agent_lists_at_timesteps[timestep][k].heading.y = combo.y;
-        		
-        		agent_lists_at_timesteps[timestep][k].position.x = agent_lists_at_timesteps[timestep-1][k].position.x;
-        		agent_lists_at_timesteps[timestep][k].position.y = agent_lists_at_timesteps[timestep-1][k].position.y;
-        		
-        		agent_lists_at_timesteps[timestep][k].speed = agent_lists_at_timesteps[timestep-1][k].speed;
-        		agent_lists_at_timesteps[timestep][k].type = agent_lists_at_timesteps[timestep-1][k].type;
+        		else {
+        			/*
+        			if(((timestep - 1) % 50) == 0) {
+        				
+        				agent_close = find_closest(&agent_lists_at_timesteps[timestep-1][k], k, agent_lists_at_timesteps[timestep-1], num_agents);	
+        			}
+        			*/
+        			
+        			//seek_vector = seek(&agent_lists_at_timesteps[timestep-1][k], &agent_lists_at_timesteps[timestep-1][agent_close]);
+        			seek_vector = init_vector(5.0, 0.0);
+        			
+        			agent_lists_at_timesteps[timestep][k].heading.x = seek_vector.x;
+				agent_lists_at_timesteps[timestep][k].heading.y = seek_vector.y;
+					
+				agent_lists_at_timesteps[timestep][k].position.x = agent_lists_at_timesteps[timestep-1][k].position.x;
+				agent_lists_at_timesteps[timestep][k].position.y = agent_lists_at_timesteps[timestep-1][k].position.y;
+					
+				agent_lists_at_timesteps[timestep][k].speed = agent_lists_at_timesteps[timestep-1][k].speed;
+				agent_lists_at_timesteps[timestep][k].type = agent_lists_at_timesteps[timestep-1][k].type;
+        				
+        			}
+        			
+        			
         	}
-        	//printf("just changed headings\n");
+        				
+        			
+        			
+        		
+        		
+        	
+        	printf("just changed headings\n");
 # 		pragma omp parallel for num_threads(thread_count)
         	for(k = 0; k< num_agents; k++){
         		agent_update(&agent_lists_at_timesteps[timestep][k], 1);

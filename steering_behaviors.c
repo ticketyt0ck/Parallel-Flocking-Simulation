@@ -105,3 +105,44 @@ Vector2D alignment(Agent* a, int index, Agent *agentarray, int num_agents) {
 	
 	
 }
+
+
+int find_closest(Agent* a, int index, Agent *agentarray, int num_agents) {
+	Vector2D closest;
+	int closest_agent;
+	
+	int i;
+	double mag = 1000;
+	
+	for(i = 0; i < num_agents; i++) {
+		if (i != index) {
+			closest = point_minus(&a->position, &agentarray[i].position);
+			
+			if(magnitude(&closest) < mag) {	
+				mag = magnitude(&closest);
+				closest_agent = i;
+			}
+			
+			
+			
+		}
+		
+	
+	}
+	
+	return closest_agent;
+}
+
+
+Vector2D seek(Agent* a, Agent* b) {
+	Vector2D seek_vector, steering_force;
+
+	seek_vector = point_minus(&a->position, &b->position);
+	normalize(&seek_vector);
+	seek_vector = times(&seek_vector, a->speed);
+	steering_force = minus(&seek_vector, &a->heading);
+	
+	return steering_force;
+	
+	
+}

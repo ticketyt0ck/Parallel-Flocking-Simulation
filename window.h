@@ -5,6 +5,8 @@
 
 #include "agent.h"
 #define WHITE (255<<16 | 255<<8 | 255)
+#define RED (255<<16 | 0<<8 | 0)
+#define FUCHSIA (255<<16 | 0<<8 | 255)
 #define BLACK 0
 
 /* creates a window with given dimensions */

@@ -142,7 +142,7 @@ void run_sim(Agent **agent_list, long num_steps, long num_agents){
 			
 			
 			if(type == 0){
-				set_color(41550);
+				set_color(FUCHSIA);
 			}
 			else{
 				set_color(WHITE);
